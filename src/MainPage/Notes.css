@@ -1,0 +1,50 @@
+body{
+    background-color: #84a98c;
+}
+
+.main{
+    background-color: #84a98c;
+    position: relative;
+    height: 100vh;
+    width: 70vw;
+    left: 30vw;
+}
+
+.container{
+    margin-top: 150px;
+}
+
+.notes-item{
+    background-color: #84a98c;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+}
+
+.notes-item ul{
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.notes-list{
+    width: 250px;
+    height: 120px;
+    background-color: #2f3e46;
+    opacity: 0.8;
+}
+.notes-list li{
+    padding: 15px 0 10px 10px;
+    color: white;
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+}
+
+button{
+ width: 250px;
+ border: none;
+ background-color:  white;
+}
+

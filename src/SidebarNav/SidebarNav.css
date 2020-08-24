@@ -1,0 +1,22 @@
+nav{
+    position: absolute;
+    right: 0;
+    top: 180px;
+}
+
+.navbar-items{
+    text-decoration: none;
+    display: block;
+    padding: 10px 30px 10px 50px;
+    background-color:#2f3e46;
+    color: white;
+    margin: 10px 0;
+}
+
+.navbar-items:hover{
+    background-color: #84a98c;
+}
+
+.navbar-items:active{
+    background-color: #84a98c;
+}

@@ -119,14 +119,14 @@ deleteNote = noteId => {
 
 handleAddNote = note => {
   this.setState({
-    notes: [...this.state.notes,
+    notes: [...this.state.notes, //overwrite the existing properties with the ones we're passing
     note]
   })
 }
 
 handleAddFolder = folder => {
   this.setState({
-    folders:[ ...this.state.folders,
+    folders:[...this.state.folders, //overwrite the existing properties with the ones we're passing
     folder]
   })
 }

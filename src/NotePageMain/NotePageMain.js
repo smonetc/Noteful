@@ -43,4 +43,3 @@ class NotePageMain extends React.Component {
 export default NotePageMain;
 
 
-//new line then splits 

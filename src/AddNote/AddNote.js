@@ -20,23 +20,23 @@ class AddNote extends React.Component{
             folderId: e.target['folder-select'].value,
             modified: new Date()
         }
-
-        fetch(`${config.API_ENDPOINT}/notes/note`,{
+    
+            fetch(`${config.API_ENDPOINT}/notes/note`,{
            method:'POST',
            headers:{
                'content-type': 'application/json'
            }, 
            body: JSON.stringify(getNote),
-        })
-        .then(notesRes => {
-            if (!notesRes.ok)
-                return notesRes.json().then(e => Promise.reject(e)) //function that returns the Promise object that is rejected with a given reason.
-            return notesRes.json()
-        })
-        .then(note => { 
-            this.context.addNote(note)
-            this.props.history.push(`/folder/${note.folderId}`)
-        })
+            })
+            .then(notesRes => {
+                if (!notesRes.ok)
+                    return notesRes.json().then(e => Promise.reject(e)) //function that returns the Promise object that is rejected with a given reason.
+                return notesRes.json()
+            })
+            .then(note => { 
+                this.context.addNote(note)
+                this.props.history.push(`/folder/${note.folderId}`)
+            })
         .catch(error => {
             console.log(error)
         })

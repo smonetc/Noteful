@@ -22,7 +22,7 @@ class AddFolder extends React.Component{
           name: e.target['folder-section'].value
         }
 
-        fetch(`${config.API_ENDPOINT}/folders`, {
+        fetch(`${config.API_ENDPOINT}/folders/folder`, {
             method: 'POST',
             headers: {
               'content-type': 'application/json',
@@ -33,14 +33,15 @@ class AddFolder extends React.Component{
             if (!foldersRes.ok)
                 return foldersRes.json().then(e => Promise.reject(e)) //function that returns the Promise object that is rejected with a given reason.
             return foldersRes.json()
-        })
-        .then(folder => {
-            this.context.addFolder(folder)
-            this.props.history.push(`/folder/${folder.id}`)
-          })
+            })
+            .then(folder => {
+                this.context.addFolder(folder)
+                this.props.history.push(`/folder/${folder.id}`)
+            })
+        
         .catch(error => {
             console.error({error});
-        }); 
+        }) 
     }
 
 

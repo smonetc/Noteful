@@ -7,9 +7,9 @@ import CircleButton from '../CircleButton/CircleButton'
 import NotefulContext from '../NotefulContext';
 
 class NoteListNav extends React.Component{
-// static defaultProps = {
-//     folders: []
-//   };
+static defaultProps = {
+    folders: []
+  };
 
   static contextType = NotefulContext;
 

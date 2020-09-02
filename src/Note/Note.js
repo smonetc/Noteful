@@ -7,33 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Notes.css'
 
 
-
-// function handleDeleteNote(noteId, callback) {
-//   fetch(config.API_notes + `/${noteId}`, {
-//     method: 'DELETE',
-//     headers: {
-//       'content-type': 'application/json',
-//     }
-//   })
-//     .then(res => {
-//       if (!res.ok) {
-//         // get the error message from the response,
-//         return res.json().then(error => {
-//           // then throw it
-//           throw error
-//         })
-//       }
-//       return res.json()
-//     })
-//     .then(data => {
-//       console.log({ data })
-//       callback(noteId)
-//     })
-//     .catch(error => {
-//       console.log(error)
-//     })
-// } 
-
 class Note extends React.Component{
   static defaultProps ={
     onDeleteNote: () => {},

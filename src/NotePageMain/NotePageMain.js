@@ -6,9 +6,6 @@ import './NotePageMain.css'
 
 class NotePageMain extends React.Component {
   static defaultProps = {
-    // note: {
-    //   content: '',
-    // }
     match: {
       params: {}
     }
@@ -46,3 +43,4 @@ class NotePageMain extends React.Component {
 export default NotePageMain;
 
 
+//new line then splits 

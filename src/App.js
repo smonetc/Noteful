@@ -2,8 +2,8 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom'
 import './App.css';
 import Header from './Header'
-// import STORE from './STORE'
-
+import AddFolder from './AddFolder/AddFolder'
+import AddNote from './AddNote/AddNote'
 import NoteListNav from './NoteListNav/NoteListNav';
 import NotePageNav from './NotePageNav/NotePageNav';
 import NoteListMain from './NoteListMain/NoteListMain';
@@ -36,27 +36,11 @@ class App extends React.Component{
   }
 
   componentDidMount() {
-    // fake date loading from API call
-    // setTimeout(() => this.setState(STORE), 600);
-    // Promise.all([
-    //   fetch(config.API_folders),
-    //   fetch(config.API_notes) ],
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       'content-type': 'application/json',
-    //     }
-    //   })        
+        
     Promise.all([
       fetch(`${config.API_ENDPOINT}/notes`),
       fetch(`${config.API_ENDPOINT}/folders`)
     ])
-  //     .then((results) => 
-  //       Promise.all(results.map(r => r.text()))
-  //     )
-  //     .then(this.setNotes, this.setFolders)
-  //     .catch(error => this.setState({ error }))
-  // }
   .then(([notesRes, foldersRes]) => {
     if (!notesRes.ok)
         return notesRes.json().then(e => Promise.reject(e));
@@ -74,7 +58,7 @@ class App extends React.Component{
 }
 
 renderNavRoutes() {
-  // const {notes, folders} = this.context;
+  ['/', '/folder/:folderId'].map(path => console.log(path, 'Looking for the path!'))
   return (
     <>
       {['/', '/folder/:folderId'].map(path => (
@@ -89,17 +73,17 @@ renderNavRoutes() {
             path="/note/:noteId"
             component={NotePageNav}
       />
-      <Route path="/add-folder" 
+      {
+        ['/add-folder', '/add-note'].map(path => (
+          <Route path={path} 
       component={NotePageNav} />
-
-      <Route path="/add-note" 
-      component={NotePageNav} />
+        ))
+      }
     </>
   );
 }
 
 renderMainRoutes() {
-  // const {notes, folders} = this.context;
   return (
       <>
           {['/', '/folder/:folderId'].map(path => (
@@ -114,24 +98,47 @@ renderMainRoutes() {
               path="/note/:noteId"
              component={NotePageMain}
           />
+          <Route
+              path="/add-note"
+             component={AddNote}
+          />
+          <Route
+              path="/add-folder"
+             component={AddFolder}
+          />
       </>
   );
 }
 
 deleteNote = noteId => {
-  // console.log(noteId)
-  // const newNotes = this.state.notes.filter(note =>
-  // note.id !== noteId
-  // )
+
   this.setState({
     notes: this.state.notes.filter(note => note.id !== noteId)
   })
 };
 
+handleAddNote = note => {
+  this.setState({
+    notes: [...this.state.notes,
+    note]
+  })
+}
+
+handleAddFolder = folder => {
+  this.setState({
+    folders:[ ...this.state.folders,
+    folder]
+  })
+}
+
+
+
   render(){
     const contextValue = {
       notes: this.state.notes,
       folders: this.state.folders,
+      addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote,
       deleteNote: this.deleteNote,
       }
     return(

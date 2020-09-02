@@ -7,11 +7,6 @@ import './NotePageNav.css'
 
 class NotePageNav extends React.Component{
  
-// static defaultProps = {
-//   history: {
-//     goBack: () => {}
-//   }
-// }
 static defaultProps = {
   history: {
     goBack: () => { }
@@ -36,12 +31,12 @@ const folder = findFolder(folders, note.folderId)
           onClick={() => this.props.history.goBack()}
           className='NotePageNav__back-button'
         >
-          <FontAwesomeIcon icon='chevron-left' />
+          <FontAwesomeIcon icon='chevron-left' /> 
           <br />
           Back
         </CircleButton>
         {folder && (
-          <h3 className='NotePageNav__folder-name'>
+          <h3 className='NotePageNav__folder-name'> 
             {folder.name}
           </h3>
         )}

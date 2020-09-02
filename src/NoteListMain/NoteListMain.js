@@ -10,7 +10,6 @@ import './NoteListMain.css'
 class NoteListMain extends React.Component{
 
   static defaultProps = {
-    // notes: [],
     match: {
       params: {}
     }

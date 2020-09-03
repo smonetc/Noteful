@@ -2,6 +2,7 @@ import React from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import NotefulContext from '../NotefulContext'
 import config from '../config'
+import PropTypes from 'prop-types'
 import './AddFolder.css'
 
 
@@ -15,19 +16,19 @@ class AddFolder extends React.Component{
       
     static contextType = NotefulContext;
 
-    handleFolderSubmit = (e) => {
-
+    handleSubmit = (e) => {
+    
         e.preventDefault()
         const folder = {
           name: e.target['folder-section'].value
         }
 
-        fetch(`${config.API_ENDPOINT}/folders/folder`, {
+        fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST',
+            body: JSON.stringify(folder),
             headers: {
               'content-type': 'application/json',
-            },
-            body: JSON.stringify(folder),
+            }
           })
           .then(foldersRes => {
             if (!foldersRes.ok)
@@ -36,7 +37,7 @@ class AddFolder extends React.Component{
             })
             .then(folder => {
                 this.context.addFolder(folder)
-                this.props.history.push(`/folder/${folder.id}`)
+                this.props.history.push('/')
             })
         
         .catch(error => {
@@ -46,10 +47,11 @@ class AddFolder extends React.Component{
 
 
     render(){
+        // const {folders: []} = this.context
         return(
             <div className="AddFolder">
                 <h2>Create A Folder</h2>
-                <NotefulForm onSubmit={this.handleFolderSubmit}>
+                <NotefulForm onSubmit={this.handleSubmit}>
                         <div>
                             <label htmlFor='name'>
                             Name
@@ -65,6 +67,10 @@ class AddFolder extends React.Component{
             </div>
         )
     }
+}
+
+AddFolder.propTypes = {
+    name: PropTypes.string
 }
 
 export default AddFolder;

@@ -2,16 +2,21 @@ import React from 'react'
 import config from '../config'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import NotefulContext from '../NotefulContext'
+import PropTypes from 'prop-types'
 
 class AddNote extends React.Component{
     static defaultProps = {
-            addNote: () => { },
+        history: {
+            push: () => { },
+        }
         
     }
 
-    static contextType = NotefulContext
 
-    handleNoteSubmit = (e) => {
+    static contextType = NotefulContext;
+
+
+    handleSubmit = (e) => {
         e.preventDefault()
 
         const getNote ={
@@ -21,21 +26,21 @@ class AddNote extends React.Component{
             modified: new Date()
         }
     
-            fetch(`${config.API_ENDPOINT}/notes/note`,{
+        fetch(`${config.API_ENDPOINT}/notes/note`,{
            method:'POST',
+           body: JSON.stringify(getNote),
            headers:{
                'content-type': 'application/json'
-           }, 
-           body: JSON.stringify(getNote),
+           }
             })
             .then(notesRes => {
                 if (!notesRes.ok)
                     return notesRes.json().then(e => Promise.reject(e)) //function that returns the Promise object that is rejected with a given reason.
                 return notesRes.json()
             })
-            .then(note => { 
+            .then(note => {
                 this.context.addNote(note)
-                this.props.history.push(`/folder/${note.folderId}`)
+                this.props.history.push('/')
             })
         .catch(error => {
             console.log(error)
@@ -49,18 +54,25 @@ class AddNote extends React.Component{
         return(
             <div className="AddNote">
                 <h2>Create A Note</h2>
-                <NotefulForm>
+                <NotefulForm onSubmit={this.handleSubmit}>
                     <div className='field'>
                         <label htmlFor='name'>Name</label>
-                        <input type='text' id='name' name='name-section' required/>
+                        <input 
+                        type='text' 
+                        id='name' 
+                        name='name-section' />
                     </div>
                     <div className='field'>
                         <label htmlFor='content'>Content</label>
-                        <textarea id='content'/>
+                        <textarea 
+                        id='content' 
+                        name='content'/>
                     </div>
                     <div className='field'>
                         <label htmlFor='folder-select'>Folder</label>
-                        <select id='folder-select' name='folder-select'>
+                        <select 
+                        id='folder-select' 
+                        name='folder-select'>
                             <option value={null}>...</option>
                             {folders.map( folder => 
                             <option key={folder.id} value={folder.id}>
@@ -70,7 +82,9 @@ class AddNote extends React.Component{
                         </select>
                     </div>
                     <div className='buttons'>
-                        <button type='submit'>
+                        <button 
+                        type='submit'
+                        to='/'>
                         Add Note
                         </button>
                     </div>
@@ -78,6 +92,13 @@ class AddNote extends React.Component{
             </div>
         )
     }
+}
+
+AddNote.propTypes = {
+name: PropTypes.string.isRequired,
+content: PropTypes.string,
+folderId: PropTypes.number,
+modified: PropTypes.number
 }
 
 export default AddNote;

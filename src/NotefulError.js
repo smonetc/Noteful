@@ -15,7 +15,7 @@ class NotefulError extends React.Component{
     render() {
         if (this.state.hasError) {      
             return (
-            <h2>Could not submit new note.</h2>
+            <h2>Something went wrong.</h2>
             );
         }
         return this.props.children;

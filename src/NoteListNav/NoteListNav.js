@@ -5,6 +5,7 @@ import {countNotesForFolder} from '../Notes-Helper'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import CircleButton from '../CircleButton/CircleButton'
 import NotefulContext from '../NotefulContext';
+import PropTypes from 'prop-types'
 
 class NoteListNav extends React.Component{
 static defaultProps = {
@@ -50,6 +51,10 @@ static defaultProps = {
   }
     
   }
+
+NoteListNav.propTypes = {
+  folders: PropTypes.array
+}
   
 export default NoteListNav;
 

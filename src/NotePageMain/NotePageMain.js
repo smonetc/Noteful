@@ -3,6 +3,7 @@ import Note from '../Note/Note'
 import NotefulContext from '../NotefulContext';
 import {findNote} from '../Notes-Helper'
 import './NotePageMain.css'
+import PropTypes from 'prop-types'
 
 class NotePageMain extends React.Component {
   static defaultProps = {
@@ -38,6 +39,13 @@ class NotePageMain extends React.Component {
     )
   }
 
+}
+
+NotePageMain.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  modified: PropTypes.number,
+  onDeleteNote: PropTypes.func
 }
 
 export default NotePageMain;

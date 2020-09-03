@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
 import {findNote,findFolder} from '../Notes-Helper'
 import NotefulContext from '../NotefulContext';
+import PropTypes from 'prop-types'
 import './NotePageNav.css'
 
 class NotePageNav extends React.Component{
@@ -44,6 +45,10 @@ const folder = findFolder(folders, note.folderId)
     )
   }
 
+}
+
+NotePageNav.propTypes = {
+  history: PropTypes.object
 }
 
 export default NotePageNav;

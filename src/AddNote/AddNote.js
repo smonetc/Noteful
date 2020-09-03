@@ -3,6 +3,7 @@ import config from '../config'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import NotefulContext from '../NotefulContext'
 import PropTypes from 'prop-types'
+import NotefulError from '../NotefulError'
 
 class AddNote extends React.Component{
     static defaultProps = {
@@ -10,6 +11,18 @@ class AddNote extends React.Component{
             push: () => { },
         }
         
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          name: {
+            value: '',
+            touched: false
+          },
+          content: '',
+          folderId: ''
+        }
     }
 
 
@@ -26,7 +39,7 @@ class AddNote extends React.Component{
             modified: new Date()
         }
     
-        fetch(`${config.API_ENDPOINT}/notes/note`,{
+        fetch(`${config.API_ENDPOINT}/notes`,{
            method:'POST',
            body: JSON.stringify(getNote),
            headers:{
@@ -47,7 +60,14 @@ class AddNote extends React.Component{
         })
     }
 
-
+    validateName = () => {
+        const name = this.state.name.value.trim();
+        if (name.length === 0) {
+          return "Name is required";
+        } else if (name.length < 3) {
+          return "Name must be at least 3 characters long";
+        }
+    }
 
     render(){
         const { folders = [] } = this.context
@@ -60,7 +80,7 @@ class AddNote extends React.Component{
                         <input 
                         type='text' 
                         id='name' 
-                        name='name-section' />
+                        name='name-section' required />
                     </div>
                     <div className='field'>
                         <label htmlFor='content'>Content</label>
@@ -82,11 +102,15 @@ class AddNote extends React.Component{
                         </select>
                     </div>
                     <div className='buttons'>
-                        <button 
-                        type='submit'
-                        to='/'>
-                        Add Note
-                        </button>
+                        <NotefulError>
+                            <button 
+                                type='submit'
+                                to='/'
+                                disabled={this.validateName}
+                            >
+                                Add Note
+                            </button>
+                        </NotefulError>
                     </div>
                 </NotefulForm>
             </div>
@@ -95,6 +119,7 @@ class AddNote extends React.Component{
 }
 
 AddNote.propTypes = {
+history: PropTypes.object,
 name: PropTypes.string.isRequired,
 content: PropTypes.string,
 folderId: PropTypes.number,

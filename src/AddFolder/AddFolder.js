@@ -4,6 +4,7 @@ import NotefulContext from '../NotefulContext'
 import config from '../config'
 import PropTypes from 'prop-types'
 import './AddFolder.css'
+import NotefulError from '../NotefulError'
 
 
 class AddFolder extends React.Component{
@@ -19,13 +20,13 @@ class AddFolder extends React.Component{
     handleSubmit = (e) => {
     
         e.preventDefault()
-        const folder = {
+        const newfolder = {
           name: e.target['folder-section'].value
         }
 
         fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST',
-            body: JSON.stringify(folder),
+            body: JSON.stringify(newfolder),
             headers: {
               'content-type': 'application/json',
             }
@@ -46,6 +47,7 @@ class AddFolder extends React.Component{
     }
 
 
+
     render(){
         // const {folders: []} = this.context
         return(
@@ -56,12 +58,16 @@ class AddFolder extends React.Component{
                             <label htmlFor='name'>
                             Name
                             </label>
-                            <input type='text' id='name' name="folder-section" />
+                            <input type='text' id='name' name="folder-section" required/>
                         </div>
                         <div className='buttons'>
-                            <button type='submit'>
-                            Add folder
-                            </button>
+                            <NotefulError>
+                                <button 
+                                type='submit'
+                                >
+                                Add folder
+                                </button>
+                            </NotefulError>
                         </div>
                 </NotefulForm>
             </div>
@@ -70,7 +76,8 @@ class AddFolder extends React.Component{
 }
 
 AddFolder.propTypes = {
-    name: PropTypes.string
+    history: PropTypes.object,
+    name: PropTypes.string.isRequired
 }
 
 export default AddFolder;

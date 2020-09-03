@@ -4,6 +4,7 @@ import NotefulContext from '../NotefulContext';
 import config from '../config'
 // import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import PropTypes from 'prop-types'
 import './Notes.css'
 
 
@@ -64,6 +65,7 @@ class Note extends React.Component{
               {' '}
               <span className='Date'>
                 {modified}
+                {/* {format(modified, 'Do MMM YYYY')} */}
               </span>
             </div>
           </div>
@@ -71,6 +73,12 @@ class Note extends React.Component{
       // </NotefulContext.Consumer>
       )
   }
+}
+
+Note.propTypes = {
+  onDeleteNote: PropTypes.func,
+  name: PropTypes.string,
+  modified: PropTypes.number
 }
 
 

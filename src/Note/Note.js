@@ -43,7 +43,6 @@ class Note extends React.Component{
   render(){
     const { name, id, modified } = this.props
     return (
-      // <NotefulContext.Consumer> 
         <div className='Note'>
           <h2 className='Note__title'>
             <Link to={`/note/${id}`}>
@@ -64,13 +63,11 @@ class Note extends React.Component{
               Modified
               {' '}
               <span className='Date'>
-                {modified}
-                {/* {format(modified, 'Do MMM YYYY')} */}
+              {modified}
               </span>
             </div>
           </div>
         </div>
-      // </NotefulContext.Consumer>
       )
   }
 }

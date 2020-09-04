@@ -57,6 +57,3 @@ NoteListNav.propTypes = {
 }
   
 export default NoteListNav;
-
-
-

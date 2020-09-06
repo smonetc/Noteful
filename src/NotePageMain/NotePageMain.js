@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment }  from 'react'
 import Note from '../Note/Note'
 import NotefulContext from '../NotefulContext';
 import {findNote} from '../Notes-Helper'
@@ -31,9 +31,11 @@ class NotePageMain extends React.Component {
           onDeleteNote={this.handleDeleteNote}
         />
         <div className='NotePageMain__content'>
-          {note.content.split(/\n \r|\n/).map((para, i) =>
-            <p key={i}>{para}</p>
-          )}
+          <Fragment>
+            {note.content.split(/\n \r|\n/).map((para, i) =>
+              <p key={i}>{para}</p>
+            )}
+          </Fragment>
         </div>
       </section>
     )

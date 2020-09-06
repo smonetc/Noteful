@@ -89,6 +89,8 @@ class AddNote extends React.Component{
                             type='text' 
                             id='name' 
                             name='name-section'
+                            aria-required="true"
+                            aria-label="Name"
                             onChange={e => this.updateName(e.target.value)}
                             required  //requires the user inputs a name 
                         />
@@ -97,13 +99,15 @@ class AddNote extends React.Component{
                             <label htmlFor='content'>Content</label>
                             <textarea 
                             id='content' 
-                            name='content'/>
+                            name='content'
+                            aria-label="Content"/>
                         </div>
                         <div className='field'>
                             <label htmlFor='folder-select'>Folder</label>
                             <select 
                             id='folder-select' 
-                            name='folder-select'>
+                            name='folder-select'
+                            aria-label="Folder">
                                 <option value={null}>...</option>
                                 {folders.map( folder => 
                                 <option key={folder.id} value={folder.id}>

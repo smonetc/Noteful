@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 
 class NotefulError extends React.Component{
     constructor(props){
@@ -15,7 +15,9 @@ class NotefulError extends React.Component{
     render() {
         if (this.state.hasError) {      
             return (
-            <h2>Could not display this screen.</h2>
+            <Fragment>
+                <h2>Could not display this screen.</h2>
+            </Fragment>
             );
         }
         return this.props.children;

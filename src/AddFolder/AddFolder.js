@@ -90,6 +90,8 @@ class AddFolder extends React.Component{
                                 type='text' 
                                 id='name' 
                                 name="folder-section" 
+                                aria-required="true"
+                                aria-label="Name"
                                 onChange={e => this.updateName(e.target.value)}
                                 required  //requires the user inputs a name
                                 />

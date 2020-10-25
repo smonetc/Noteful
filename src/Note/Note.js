@@ -19,7 +19,7 @@ class Note extends React.Component{
     e.preventDefault()
     const noteId = this.props.id
 
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -41,12 +41,12 @@ class Note extends React.Component{
   }
 
   render(){
-    const { name, id, modified } = this.props
+    const { title, id, modified } = this.props
     return (
         <div className='Note'>
           <h2 className='Note__title'>
             <Link to={`/note/${id}`}>
-              {name}
+              {title}
             </Link>
           </h2>
           <button 
@@ -74,7 +74,7 @@ class Note extends React.Component{
 
 Note.propTypes = {
   onDeleteNote: PropTypes.func,
-  name: PropTypes.string,
+  title: PropTypes.string,
   modified: PropTypes.number
 }
 

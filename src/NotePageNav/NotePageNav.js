@@ -23,7 +23,7 @@ static contextType = NotefulContext;
 const { notes, folders, } = this.context
 const { noteId } = this.props.match.params
 const note = findNote(notes, noteId) || {}
-const folder = findFolder(folders, note.folderId)
+const folder = findFolder(folders, note.folder_id)
     return (
       <div className='NotePageNav'>
         <CircleButton
@@ -38,7 +38,7 @@ const folder = findFolder(folders, note.folderId)
         </CircleButton>
         {folder && (
           <h3 className='NotePageNav__folder-name'> 
-            {folder.name}
+            {folder.title}
           </h3>
         )}
       </div>

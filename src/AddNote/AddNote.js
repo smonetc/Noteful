@@ -17,7 +17,7 @@ class AddNote extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-          name: {
+          title: {
             value: '',
             touched:false
           },
@@ -29,21 +29,21 @@ class AddNote extends React.Component{
 
     static contextType = NotefulContext;
 
-    updateName(name) {
-        this.setState({name: {value: name, touched: true}});
+    updateTitle(title) {
+        this.setState({title: {value: title, touched: true}});
       }
 
     handleSubmit = (e) => {
         e.preventDefault()
         if (this.isNameValid()){
             const getNote ={
-                name: e.target['name-section'].value,
+                title: e.target['title-section'].value,
                 content: e.target['content'].value,
-                folderId: e.target['folder-select'].value,
+                folder_id: e.target['folder-select'].value,
                 modified: new Date()
             }
         
-            fetch(`${config.API_ENDPOINT}/notes`,{
+            fetch(`${config.API_ENDPOINT}/api/notes`,{
                method:'POST',
                body: JSON.stringify(getNote),
                headers:{
@@ -66,11 +66,11 @@ class AddNote extends React.Component{
         
     }
 
-    // function will validate that the name is longer than 3 characters
+    // function will validate that the title is longer than 3 characters
    isNameValid = () => {
-        const name = this.state.name.value.trim();
-         if (name.length < 3) {
-            this.setState({errorMessage: "Name must be at least 3 characters long"});
+        const title = this.state.title.value.trim();
+         if (title.length < 3) {
+            this.setState({errorMessage: "Title must be at least 3 characters long"});
             return false;
         }
         return true;
@@ -84,15 +84,15 @@ class AddNote extends React.Component{
                     <h2>Create A Note</h2>
                     <NotefulForm onSubmit={this.handleSubmit}>
                         <div className='field'>
-                            <label htmlFor='name'>Name</label>
+                            <label htmlFor='title'>Title</label>
                             <input 
                             type='text' 
-                            id='name' 
-                            name='name-section'
+                            id='title' 
+                            name='title-section'
                             aria-required="true"
-                            aria-label="Name"
-                            onChange={e => this.updateName(e.target.value)}
-                            required  //requires the user inputs a name 
+                            aria-label="Title"
+                            onChange={e => this.updateTitle(e.target.value)}
+                            required  //requires the user inputs a title 
                         />
                         </div>
                         <div className='field'>
@@ -111,7 +111,7 @@ class AddNote extends React.Component{
                                 <option value={null}>...</option>
                                 {folders.map( folder => 
                                 <option key={folder.id} value={folder.id}>
-                                    {folder.name}
+                                    {folder.title}
                                 </option>
                                 )}
                             </select>
@@ -135,9 +135,9 @@ class AddNote extends React.Component{
 
 AddNote.propTypes = {
 history: PropTypes.object,
-name: PropTypes.string.isRequired,
+title: PropTypes.string.isRequired,
 content: PropTypes.string,
-folderId: PropTypes.number,
+folder_id: PropTypes.number,
 modified: PropTypes.number
 }
 

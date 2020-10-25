@@ -19,7 +19,7 @@ class AddFolder extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-          name: {
+          title: {
             value: '',
             touched:false
           },
@@ -30,8 +30,8 @@ class AddFolder extends React.Component{
 
     static contextType = NotefulContext;
 
-    updateName(name) {
-        this.setState({name: {value: name, touched: true}});
+    updateTitle(title) {
+        this.setState({title: {value: title, touched: true}});
       }
 
     handleSubmit = (e) => {
@@ -39,10 +39,10 @@ class AddFolder extends React.Component{
         e.preventDefault()
         if (this.isNameValid()){
             const newfolder = {
-                name: e.target['folder-section'].value
+                title: e.target['folder-section'].value
               }
       
-              fetch(`${config.API_ENDPOINT}/folders`, {
+              fetch(`${config.API_ENDPOINT}/api/folders`, {
                   method: 'POST',
                   body: JSON.stringify(newfolder),
                   headers: {
@@ -67,9 +67,9 @@ class AddFolder extends React.Component{
 
     // function will validate that the name is longer than 3 characters
    isNameValid = () => {
-    const name = this.state.name.value.trim();
-     if (name.length < 3) {
-        this.setState({errorMessage: "Name must be at least 3 characters long"});
+    const title = this.state.title.value.trim();
+     if (title.length < 3) {
+        this.setState({errorMessage: "Title must be at least 3 characters long"});
         return false;
     }
     return true;
@@ -83,16 +83,16 @@ class AddFolder extends React.Component{
                     <h2>Create A Folder</h2>
                     <NotefulForm onSubmit={this.handleSubmit}>
                             <div>
-                                <label htmlFor='name'>
-                                Name
+                                <label htmlFor='title'>
+                                Title
                                 </label>
                                 <input 
                                 type='text' 
-                                id='name' 
+                                id='title' 
                                 name="folder-section" 
                                 aria-required="true"
-                                aria-label="Name"
-                                onChange={e => this.updateName(e.target.value)}
+                                aria-label="Title"
+                                onChange={e => this.updateTitle(e.target.value)}
                                 required  //requires the user inputs a name
                                 />
                             </div>
@@ -113,7 +113,7 @@ class AddFolder extends React.Component{
 
 AddFolder.propTypes = {
     history: PropTypes.object,
-    name: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired
 }
 
 export default AddFolder;

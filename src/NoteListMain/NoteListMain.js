@@ -29,7 +29,7 @@ class NoteListMain extends React.Component{
             <li key={note.id}>
               <Note
                 id={note.id}
-                name={note.name}
+                title={note.title} //name
                 modified={note.modified}
               />
             </li>
@@ -54,7 +54,7 @@ class NoteListMain extends React.Component{
 
 NoteListMain.propTypes = {
   id: PropTypes.number,
-  name: PropTypes.string,
+  title: PropTypes.string,
   modified: PropTypes.number
 }
 

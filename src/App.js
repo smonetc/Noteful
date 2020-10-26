@@ -60,10 +60,10 @@ class App extends React.Component{
 }
 
 renderNavRoutes() {
-  ['/', '/folder/:folderId'].map(path => console.log(path, 'Looking for the path!'))
+  ['/', '/folder/:folder_id'].map(path => console.log(path, 'Looking for the path!'))
   return (
     <>
-      {['/', '/folder/:folderId'].map(path => (
+      {['/', '/folder/:folder_id'].map(path => ( //folderId
         <Route
             exact
             key={path}
@@ -72,13 +72,15 @@ renderNavRoutes() {
         />
         ))}
         <Route
-            path="/note/:noteId"
+            path="/note/:note_id" //noteId
             component={NotePageNav}
       />
       {
         ['/add-folder', '/add-note'].map(path => (
-          <Route path={path} 
-      component={NotePageNav} />
+          <Route 
+          key={path}
+          path={path} 
+          component={NotePageNav} />
         ))
       }
     </>
@@ -88,7 +90,7 @@ renderNavRoutes() {
 renderMainRoutes() {
   return (
       <>
-          {['/', '/folder/:folderId'].map(path => (
+          {['/', '/folder/:folder_id'].map(path => (  //folderId
               <Route
                   exact
                   key={path}
@@ -97,7 +99,7 @@ renderMainRoutes() {
               />
           ))}
           <Route
-              path="/note/:noteId"
+              path="/note/:note_id" //noteId
              component={NotePageMain}
           />
           <Route
@@ -112,10 +114,10 @@ renderMainRoutes() {
   );
 }
 
-deleteNote = noteId => {
+deleteNote = note_id => {
 
   this.setState({
-    notes: this.state.notes.filter(note => note.id !== noteId)
+    notes: this.state.notes.filter(note => note.id !== note_id)
   })
 };
 

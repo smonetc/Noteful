@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import NotefulContext from '../NotefulContext';
 import config from '../config'
 // import { format } from 'date-fns'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types'
 import './Notes.css'
 
@@ -17,9 +16,9 @@ class Note extends React.Component{
 
   handleClickDelete = e => {
     e.preventDefault()
-    const noteId = this.props.id
+    const note_id = this.props.id  //noteId
 
-    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/api/notes/${note_id}`, {  //noteId
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -31,9 +30,9 @@ class Note extends React.Component{
         return res.json()
       })
       .then(() => {
-        this.context.deleteNote(noteId)
+        this.context.deleteNote(note_id) //noteId
         // allow parent to perform extra behaviour
-        this.props.onDeleteNote(noteId)
+        this.props.onDeleteNote(note_id) //noteId
       })
       .catch(error => {
         console.error({ error })
@@ -41,7 +40,7 @@ class Note extends React.Component{
   }
 
   render(){
-    const { title, id, modified } = this.props
+    const { title,id, modified } = this.props //id
     return (
         <div className='Note'>
           <h2 className='Note__title'>
@@ -54,7 +53,6 @@ class Note extends React.Component{
           type='button'
           onClick={this.handleClickDelete}
           >
-            <FontAwesomeIcon icon='trash-alt' />
             {' '}
             remove
           </button>
@@ -75,7 +73,7 @@ class Note extends React.Component{
 Note.propTypes = {
   onDeleteNote: PropTypes.func,
   title: PropTypes.string,
-  modified: PropTypes.number
+  modified: PropTypes.number,
 }
 
 

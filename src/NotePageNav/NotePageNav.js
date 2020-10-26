@@ -1,5 +1,4 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
 import {findNote,findFolder} from '../Notes-Helper'
 import NotefulContext from '../NotefulContext';
@@ -21,8 +20,8 @@ static contextType = NotefulContext;
 
   render(){
 const { notes, folders, } = this.context
-const { noteId } = this.props.match.params
-const note = findNote(notes, noteId) || {}
+const { note_id } = this.props.match.params //noteId
+const note = findNote(notes, note_id) || {} //noteId
 const folder = findFolder(folders, note.folder_id)
     return (
       <div className='NotePageNav'>
@@ -31,8 +30,7 @@ const folder = findFolder(folders, note.folder_id)
           role='link'
           onClick={() => this.props.history.goBack()}
           className='NotePageNav__back-button'
-        >
-          <FontAwesomeIcon icon='chevron-left' /> 
+        > 
           <br />
           Back
         </CircleButton>

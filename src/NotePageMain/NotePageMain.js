@@ -14,14 +14,14 @@ class NotePageMain extends React.Component {
 
   static contextType = NotefulContext;
 
-  handleDeleteNote = noteId => {
+  handleDeleteNote = note_id => {
     this.props.history.push(`/`)
   }
 
   render(){
     const { notes=[] } = this.context
-    const { noteId } = this.props.match.params
-    const note = findNote(notes, noteId) || { content: '' }
+    const { note_id } = this.props.match.params //noteId
+    const note = findNote(notes, note_id) || { content: '' } //noteId
     return (
       <section className='NotePageMain'>
         <Note

@@ -19,9 +19,9 @@ static defaultProps = {
 static contextType = NotefulContext;
 
   render(){
-const { notes, folders, } = this.context
-const { note_id } = this.props.match.params //noteId
-const note = findNote(notes, note_id) || {} //noteId
+const { notes, folders } = this.context
+const { note_id } = this.props.match.params 
+const note = findNote(notes, note_id) || {} 
 const folder = findFolder(folders, note.folder_id)
     return (
       <div className='NotePageNav'>

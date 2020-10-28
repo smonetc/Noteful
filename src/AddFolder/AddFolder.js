@@ -2,7 +2,7 @@ import React from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import NotefulContext from '../NotefulContext'
 import config from '../config'
-import PropTypes from 'prop-types'
+
 import './AddFolder.css'
 import NotefulError from '../NotefulError'
 import ValidationError from '../ValidationError/ValidationError'
@@ -111,9 +111,9 @@ class AddFolder extends React.Component{
     }
 }
 
-AddFolder.propTypes = {
-    history: PropTypes.object,
-    title: PropTypes.string.isRequired
-}
+// AddFolder.propTypes = {
+//     history: PropTypes.object,
+//     title: PropTypes.string.isRequired,
+// }
 
 export default AddFolder;

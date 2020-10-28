@@ -1,7 +1,7 @@
 import React, { Fragment }  from 'react'
 import Note from '../Note/Note'
 import NotefulContext from '../NotefulContext';
-import {findNote} from '../Notes-Helper'
+
 import './NotePageMain.css'
 import PropTypes from 'prop-types'
 
@@ -14,15 +14,17 @@ class NotePageMain extends React.Component {
 
   static contextType = NotefulContext;
 
-  handleDeleteNote = note_id => {
+  handleDeleteNote = () => {
     this.props.history.push(`/`)
   }
 
   render(){
-    const { notes=[] } = this.context
-    const { note_id } = this.props.match.params //noteId
-    const note = findNote(notes, note_id) || { content: '' } //noteId
-    return (
+    let notes = this.context.notes.filter(note =>
+      note.id === parseInt(this.props.match.params.note_id)
+    )
+
+    return notes.map( note => {
+      return(
       <section className='NotePageMain'>
         <Note
           id={note.id}
@@ -38,6 +40,8 @@ class NotePageMain extends React.Component {
           </Fragment>
         </div>
       </section>
+      )
+      }
     )
   }
 
